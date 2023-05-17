@@ -29,6 +29,22 @@ enum crkbd_layers {
   _ADJUST
 };
 
+enum unicode_names {
+    A_ACUTE_LOWER,
+    A_ACUTE_UPPER,
+    E_ACUTE_LOWER,
+    E_ACUTE_UPPER,
+    I_ACUTE_LOWER,
+    I_ACUTE_UPPER,
+    O_ACUTE_LOWER,
+    O_ACUTE_UPPER,
+    U_ACUTE_LOWER,
+    U_ACUTE_UPPER,
+    N_TILDE_LOWER,
+    N_TILDE_UPPER
+};
+
+
 #define CTRLSC LCTL_T(KC_ESC)
 #define QUORCTL RCTL_T(KC_QUOT)
 #define MOSCLN LT(_MOUSE,KC_SCLN)

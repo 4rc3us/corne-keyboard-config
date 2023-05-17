@@ -18,12 +18,27 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
-#include "users/toinux/keymap_qwerty_fr.h"
 #include "keycodes.h"
 
 #ifdef OLED_ENABLE
 #include "oled.h"
 #endif
+
+
+const uint32_t PROGMEM unicode_map[] = {
+    [A_ACUTE_LOWER] = 0x00E1, // á
+    [A_ACUTE_UPPER] = 0x00C1, // Á
+    [E_ACUTE_LOWER] = 0x00E9, // é
+    [E_ACUTE_UPPER] = 0x00C9, // É
+    [I_ACUTE_LOWER] = 0x00ED, // í
+    [I_ACUTE_UPPER] = 0x00CD, // Í
+    [O_ACUTE_LOWER] = 0x00F3, // ó
+    [O_ACUTE_UPPER] = 0x00D3, // Ó
+    [U_ACUTE_LOWER] = 0x00FA, // ú
+    [U_ACUTE_UPPER] = 0x00DA, // Ú
+    [N_TILDE_LOWER] = 0x00F1, // ñ
+    [N_TILDE_UPPER] = 0x00D1  // Ñ
+};
 
 // TEMPLATE
 //  ,-----------------------------------------------------.                    ,-----------------------------------------------------.
@@ -93,21 +108,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   ),
 
-// Accents, see http://marin.jb.free.fr/qwerty-fr/
 //  ,-----------------------------------------------------.                    ,-----------------------------------------------------.
-//  |        |   â    |   é    |   è    |   ê    |   €    |                    |   û    |   ù    |   î    |   ô    |   œ    |        |
+//  |        |        |        |   é    |        |        |                    |        |   ú    |   í    |   ó    |        |        |
 //  |--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-//  |        |   à    |   æ    |   ë    |        |   «    |                    |   »    |   ü    |   ï    |   ö    |   °    |        |
+//  |        |   á    |        |        |        |        |                    |        |        |        |        |   ñ    |        |
 //  |--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-//  |        |   à    |        |   ç    |        |        |                    |        |        |        |        |        |        | //  `--------+--------+--------+--------+--------+--------+--------.  .--------+--------+--------+--------+--------+--------+--------'
+//  |        |        |        |        |        |        |                    |        |        |        |        |        |        |
+//  `--------+--------+--------+--------+--------+--------+--------.  .--------+--------+--------+--------+--------+--------+--------'
 //                                      |        |        |        |  |        |        |        |
 //                                      `--------------------------'  `--------------------------'
-  [_ACCENTS] = LAYOUT_split_3x6_3(
-      _______, QF_ACIR, QF_EACU, QF_EGRV, QF_ECIR, QF_EURO,                      QF_UCIR, QF_UGRV, QF_ICIR, QF_OCIR,   QF_OE, _______,
-      _______, QF_AGRV,   QF_AE, QF_EDIA, _______, QF_LDAQ,                      QF_RDAQ, QF_UDIA, QF_IDIA, QF_ODIA,  QF_DEG, _______,
-      _______, QF_AGRV, _______, QF_CCED, _______, _______,                      _______, _______, _______, _______, _______, _______,
-                                          _______, _______, _______,    _______, _______, _______
 
+  [_ACCENTS] = LAYOUT_split_3x6_3(
+      _______, _______, _______, XP(E_ACUTE_LOWER, E_ACUTE_UPPER), _______, _______,                      _______, XP(U_ACUTE_LOWER, U_ACUTE_UPPER), XP(I_ACUTE_LOWER, I_ACUTE_UPPER), XP(O_ACUTE_LOWER, O_ACUTE_UPPER),   _______, _______,
+      _______, XP(A_ACUTE_LOWER, A_ACUTE_UPPER),   _______, _______, _______, _______,                      _______, _______, _______, _______,  XP(N_TILDE_LOWER, N_TILDE_UPPER), _______,
+      _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
+                                          _______, _______, _______,    _______, _______, _______
   ),
 
 // Lower
@@ -122,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                      `--------------------------'  `--------------------------'
   [_LOWER] = LAYOUT_split_3x6_3(
       KC_TILD, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN,  KC_DEL,
-      _______,   SC_F1,   SC_F2,   SC_F3,   SC_F4, XXXXXXX,                     UC(0x00F1), KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
+      _______,   SC_F1,   SC_F2,   SC_F3,   SC_F4, XXXXXXX,                     _______, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
       _______,  GAMING, XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE,                      KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX, _______,
       _______, _______, _______,                                                 UC_LINX,  UC_WINC, UC_MAC
   ),
@@ -139,7 +154,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                      `--------------------------'  `--------------------------'
   [_RAISE] = LAYOUT_split_3x6_3(
        KC_GRV,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_DEL,
-      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      UC(0x00D1), KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC, KC_BSLS,
+      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      _______, KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC, KC_BSLS,
       _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
                                           _______, _______, _______,   _______,  _______, _______
 
