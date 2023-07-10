@@ -41,7 +41,9 @@ enum unicode_names {
     U_ACUTE_LOWER,
     U_ACUTE_UPPER,
     N_TILDE_LOWER,
-    N_TILDE_UPPER
+    N_TILDE_UPPER,
+    INVERTED_QUESTION_MARK,
+    QUESTION_MARK
 };
 
 

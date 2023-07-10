@@ -37,7 +37,9 @@ const uint32_t PROGMEM unicode_map[] = {
     [U_ACUTE_LOWER] = 0x00FA, // ú
     [U_ACUTE_UPPER] = 0x00DA, // Ú
     [N_TILDE_LOWER] = 0x00F1, // ñ
-    [N_TILDE_UPPER] = 0x00D1  // Ñ
+    [N_TILDE_UPPER] = 0x00D1,  // Ñ
+    [INVERTED_QUESTION_MARK] = 0x00BF, // ¿
+    [QUESTION_MARK] = 0x003F, // ?
 };
 
 // TEMPLATE
@@ -121,7 +123,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ACCENTS] = LAYOUT_split_3x6_3(
       _______, _______, _______, XP(E_ACUTE_LOWER, E_ACUTE_UPPER), _______, _______,                      _______, XP(U_ACUTE_LOWER, U_ACUTE_UPPER), XP(I_ACUTE_LOWER, I_ACUTE_UPPER), XP(O_ACUTE_LOWER, O_ACUTE_UPPER),   _______, _______,
       _______, XP(A_ACUTE_LOWER, A_ACUTE_UPPER),   _______, _______, _______, _______,                      _______, _______, _______, _______,  XP(N_TILDE_LOWER, N_TILDE_UPPER), _______,
-      _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
+      _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, XP(INVERTED_QUESTION_MARK,QUESTION_MARK), _______,
                                           _______, _______, _______,    _______, _______, _______
   ),
 
